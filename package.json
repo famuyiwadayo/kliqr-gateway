@@ -1,14 +1,14 @@
 {
-  "name": "kliqr-transaction-microservice",
+  "name": "kliqr-gateway",
   "version": "1.0.0",
-  "description": "Transaction microservice",
+  "description": "Kliqr Gateway for routing requests from the client",
   "main": "index.ts",
   "author": "FAMUYIWA DAYO (github.com/famuyiwadayo)",
   "license": "MIT",
-  "homepage": "https://github.com/famuyiwadayo/kliqr-transactions-service#readme",
+  "homepage": "https://github.com/famuyiwadayo/kliqr-gateway#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/famuyiwadayo/kliqr-transactions-service.git"
+    "url": "git+https://github.com/famuyiwadayo/kliqr-gateway.git"
   },
   "scripts": {
     "build": "rimraf dist && tsc",
@@ -16,6 +16,8 @@
     "serve": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/index.js",
+    "container:build": "docker build -t famuyiwa/kliqr-gateway:latest .",
+    "container:deploy": "./deploy.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
