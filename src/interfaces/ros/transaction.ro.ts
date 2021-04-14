@@ -1,31 +1,44 @@
-import {
-  ObjectType,
-  Field,
-  Int,
-  Float,
-  GraphQLISODateTime,
-} from "type-graphql";
+import { ObjectType, Field, Int, Float } from "type-graphql";
+import { UserRo } from "./user.ro";
 
 @ObjectType()
 export class TransactionRo {
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   id: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   user_id: number;
 
-  @Field(() => Float)
+  @Field(() => Float, { nullable: true })
   amount: number;
 
-  @Field()
+  @Field({ nullable: true })
   type: string;
 
-  @Field()
+  @Field({ nullable: true })
   category: string;
 
-  @Field()
+  @Field({ nullable: true })
   icon_url: string;
 
-  @Field(() => GraphQLISODateTime)
-  date_time: Date | number | string;
+  @Field({ nullable: true })
+  date_time: string;
+}
+
+@ObjectType()
+export class TransactionWithUserRo extends TransactionRo {
+  @Field(() => UserRo, { nullable: true })
+  user: UserRo;
+}
+
+@ObjectType()
+export class TransactionSpentIncomeAndTotalRo {
+  @Field(() => Float)
+  spent: number;
+
+  @Field(() => Float)
+  income: number;
+
+  @Field(() => Int)
+  total: number;
 }

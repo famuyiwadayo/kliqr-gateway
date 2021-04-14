@@ -4,8 +4,39 @@
 # -----------------------------------------------
 
 type Query {
+  getSpentIncomeAndTotalTx(userId: Int!): TransactionSpentIncomeAndTotalRo!
+  getTransactions: [TransactionRo!]!
+  getTransactionsWithUser: [TransactionWithUserRo!]!
+  getUserWithTxCountById(id: Int!): UserWithTxCountRo!
   getUsers: [UserRo!]!
   getUsersWithTxCount: [UserWithTxCountRo!]!
+}
+
+type TransactionRo {
+  amount: Float
+  category: String
+  date_time: String
+  icon_url: String
+  id: Int
+  type: String
+  user_id: Int
+}
+
+type TransactionSpentIncomeAndTotalRo {
+  income: Float!
+  spent: Float!
+  total: Int!
+}
+
+type TransactionWithUserRo {
+  amount: Float
+  category: String
+  date_time: String
+  icon_url: String
+  id: Int
+  type: String
+  user: UserRo
+  user_id: Int
 }
 
 type UserRo {

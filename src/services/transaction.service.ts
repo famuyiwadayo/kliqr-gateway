@@ -1,24 +1,33 @@
-
+import axios from "axios";
+import { composeURL, createError } from "../utils";
+import { TransactionRo, TransactionSpentIncomeAndTotalRo } from "../interfaces";
 
 export default class TransactionService {
+  async getTransactions(): Promise<TransactionRo[]> {
+    try {
+      const result = await axios.get<{ data: TransactionRo[] }>(
+        composeURL("transactions", "")
+      );
 
-  async createTransaction(_: any) {
-
+      console.log(result.data.data);
+      return result.data.data;
+    } catch (error) {
+      throw createError(error.message, error.statusCode);
+    }
   }
 
-  async batchCreateTransaction(_: any[]) {
-  }
-
-  async batchCreateTransactionFromCsv(_: Express.Multer.File) {
-  }
-
-  async getTransactions() {
-  }
-
-  async getTransactionById(_: string) {
-  }
-
-  async getTransactionsByUserId(_: string) {
-
+  async getSpentIncomeAndTotalTx(
+    userId: number
+  ): Promise<TransactionSpentIncomeAndTotalRo> {
+    try {
+      const result = await axios.get<{
+        data: TransactionSpentIncomeAndTotalRo;
+      }>(
+        composeURL("transactions", `users/${userId}/spent-income-and-txCount`)
+      );
+      return { ...result.data.data, total: (result.data.data as any).count };
+    } catch (error) {
+      throw createError(error.message, error.statusCode);
+    }
   }
 }
