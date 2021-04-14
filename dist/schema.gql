@@ -4,5 +4,23 @@
 # -----------------------------------------------
 
 type Query {
-  getUsers: String!
+  getUsers: [UserRo!]!
+  getUsersWithTxCount: [UserWithTxCountRo!]!
+}
+
+type UserRo {
+  avatar: String!
+  created_at: String!
+  first_name: String!
+  id: Int!
+  last_name: String!
+}
+
+type UserWithTxCountRo {
+  avatar: String!
+  created_at: String!
+  first_name: String!
+  id: Int!
+  last_name: String!
+  total_transactions: Int!
 }

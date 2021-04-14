@@ -9,40 +9,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionRo = void 0;
+exports.UserWithTxCountRo = exports.UserTxCountRo = exports.UserRo = void 0;
 const type_graphql_1 = require("type-graphql");
-let TransactionRo = class TransactionRo {
+let UserRo = class UserRo {
 };
 __decorate([
     type_graphql_1.Field(() => type_graphql_1.Int),
     __metadata("design:type", Number)
-], TransactionRo.prototype, "id", void 0);
+], UserRo.prototype, "id", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "first_name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "last_name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "avatar", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "created_at", void 0);
+UserRo = __decorate([
+    type_graphql_1.ObjectType()
+], UserRo);
+exports.UserRo = UserRo;
+let UserTxCountRo = class UserTxCountRo {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", Number)
+], UserTxCountRo.prototype, "count", void 0);
+UserTxCountRo = __decorate([
+    type_graphql_1.ObjectType()
+], UserTxCountRo);
+exports.UserTxCountRo = UserTxCountRo;
+let UserWithTxCountRo = class UserWithTxCountRo extends UserRo {
+};
 __decorate([
     type_graphql_1.Field(() => type_graphql_1.Int),
     __metadata("design:type", Number)
-], TransactionRo.prototype, "user_id", void 0);
-__decorate([
-    type_graphql_1.Field(() => type_graphql_1.Float),
-    __metadata("design:type", Number)
-], TransactionRo.prototype, "amount", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], TransactionRo.prototype, "type", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], TransactionRo.prototype, "category", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], TransactionRo.prototype, "icon_url", void 0);
-__decorate([
-    type_graphql_1.Field(() => type_graphql_1.GraphQLISODateTime),
-    __metadata("design:type", Object)
-], TransactionRo.prototype, "date_time", void 0);
-TransactionRo = __decorate([
+], UserWithTxCountRo.prototype, "total_transactions", void 0);
+UserWithTxCountRo = __decorate([
     type_graphql_1.ObjectType()
-], TransactionRo);
-exports.TransactionRo = TransactionRo;
-//# sourceMappingURL=transaction.ro.js.map
+], UserWithTxCountRo);
+exports.UserWithTxCountRo = UserWithTxCountRo;
+//# sourceMappingURL=user.ro.js.map
