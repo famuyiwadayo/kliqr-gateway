@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRo = void 0;
+exports.UserWithTxCountRo = exports.UserTxCountRo = exports.UserRo = void 0;
 const type_graphql_1 = require("type-graphql");
 let UserRo = class UserRo {
 };
@@ -37,4 +37,24 @@ UserRo = __decorate([
     type_graphql_1.ObjectType()
 ], UserRo);
 exports.UserRo = UserRo;
+let UserTxCountRo = class UserTxCountRo {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", Number)
+], UserTxCountRo.prototype, "count", void 0);
+UserTxCountRo = __decorate([
+    type_graphql_1.ObjectType()
+], UserTxCountRo);
+exports.UserTxCountRo = UserTxCountRo;
+let UserWithTxCountRo = class UserWithTxCountRo extends UserRo {
+};
+__decorate([
+    type_graphql_1.Field(() => type_graphql_1.Int),
+    __metadata("design:type", Number)
+], UserWithTxCountRo.prototype, "total_transactions", void 0);
+UserWithTxCountRo = __decorate([
+    type_graphql_1.ObjectType()
+], UserWithTxCountRo);
+exports.UserWithTxCountRo = UserWithTxCountRo;
 //# sourceMappingURL=user.ro.js.map

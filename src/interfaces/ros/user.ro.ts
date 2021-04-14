@@ -17,3 +17,15 @@ export class UserRo {
   @Field()
   created_at: string;
 }
+
+@ObjectType()
+export class UserTxCountRo {
+  @Field()
+  count: number;
+}
+
+@ObjectType()
+export class UserWithTxCountRo extends UserRo {
+  @Field(() => Int)
+  total_transactions: number;
+}

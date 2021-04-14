@@ -9,5 +9,7 @@ export default function composeURL(
     service === "users"
       ? config.USER_SERVICE_URL
       : config.TRANSACTION_SERVICE_URL
-  }/${endpoint}${query ? `?${query}` : ""}`;
+  }/${service === "users" ? "users" : "transactions"}/${endpoint}${
+    query ? `?${query}` : ""
+  }`;
 }
