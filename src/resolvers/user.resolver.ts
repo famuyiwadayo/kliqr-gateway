@@ -1,4 +1,4 @@
-import { FieldResolver, Query, Resolver, Root } from "type-graphql";
+import { Arg, FieldResolver, Query, Resolver, Root, Int } from "type-graphql";
 import { UserRo, UserWithTxCountRo } from "../interfaces";
 import { UserService } from "../services";
 
@@ -14,6 +14,11 @@ export default class UserResolver {
   @Query(() => [UserWithTxCountRo])
   async getUsersWithTxCount() {
     return await this.service.getUsers();
+  }
+
+  @Query(() => UserWithTxCountRo)
+  async getUserWithTxCountById(@Arg("id", () => Int) id: number) {
+    return await this.service.getUserById(id);
   }
 
   @FieldResolver()

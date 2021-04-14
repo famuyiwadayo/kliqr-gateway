@@ -13,54 +13,55 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
-const interfaces_1 = require("../interfaces");
 const services_1 = require("../services");
-let UserResolver = class UserResolver {
+const interfaces_1 = require("../interfaces");
+let TransactionResolver = class TransactionResolver {
     constructor() {
-        this.service = new services_1.UserService();
+        this.txservice = new services_1.TransactionService();
+        this.usrService = new services_1.UserService();
     }
-    async getUsers() {
-        return await this.service.getUsers();
+    async getTransactions() {
+        return await this.txservice.getTransactions();
     }
-    async getUsersWithTxCount() {
-        return await this.service.getUsers();
+    async getSpentIncomeAndTotalTx(id) {
+        return await this.txservice.getSpentIncomeAndTotalTx(id);
     }
-    async getUserWithTxCountById(id) {
-        return await this.service.getUserById(id);
+    async getTransactionsWithUser() {
+        return await this.txservice.getTransactions();
     }
-    async total_transactions(root) {
-        const result = await this.service.getUserTxCount(root.id);
-        return result.count;
+    async user(root) {
+        const result = await this.usrService.getUserById(root.user_id);
+        return result;
     }
 };
 __decorate([
-    type_graphql_1.Query(() => [interfaces_1.UserRo]),
+    type_graphql_1.Query(() => [interfaces_1.TransactionRo]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getUsers", null);
+], TransactionResolver.prototype, "getTransactions", null);
 __decorate([
-    type_graphql_1.Query(() => [interfaces_1.UserWithTxCountRo]),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getUsersWithTxCount", null);
-__decorate([
-    type_graphql_1.Query(() => interfaces_1.UserWithTxCountRo),
-    __param(0, type_graphql_1.Arg("id", () => type_graphql_1.Int)),
+    type_graphql_1.Query(() => interfaces_1.TransactionSpentIncomeAndTotalRo),
+    __param(0, type_graphql_1.Arg("userId", () => type_graphql_1.Int)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getUserWithTxCountById", null);
+], TransactionResolver.prototype, "getSpentIncomeAndTotalTx", null);
+__decorate([
+    type_graphql_1.Query(() => [interfaces_1.TransactionWithUserRo]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TransactionResolver.prototype, "getTransactionsWithUser", null);
 __decorate([
     type_graphql_1.FieldResolver(),
     __param(0, type_graphql_1.Root()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [interfaces_1.UserWithTxCountRo]),
+    __metadata("design:paramtypes", [interfaces_1.TransactionWithUserRo]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "total_transactions", null);
-UserResolver = __decorate([
-    type_graphql_1.Resolver(() => interfaces_1.UserWithTxCountRo)
-], UserResolver);
-exports.default = UserResolver;
-//# sourceMappingURL=user.resolver.js.map
+], TransactionResolver.prototype, "user", null);
+TransactionResolver = __decorate([
+    type_graphql_1.Resolver(() => interfaces_1.TransactionWithUserRo)
+], TransactionResolver);
+exports.default = TransactionResolver;
+//# sourceMappingURL=transaction.resolver.js.map

@@ -1,2 +1,6 @@
 export { UserRo, UserWithTxCountRo, UserTxCountRo } from "./ros/user.ro";
-export { TransactionRo } from "./ros/transaction.ro";
+export {
+  TransactionRo,
+  TransactionWithUserRo,
+  TransactionSpentIncomeAndTotalRo,
+} from "./ros/transaction.ro";
