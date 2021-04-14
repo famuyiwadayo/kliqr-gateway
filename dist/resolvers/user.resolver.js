@@ -10,11 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
+const interfaces_1 = require("../interfaces");
+const services_1 = require("../services");
 let UserResolver = class UserResolver {
-    async getUsers() { }
+    constructor() {
+        this.service = new services_1.UserService();
+    }
+    async getUsers() {
+        return await this.service.getUsers();
+    }
 };
 __decorate([
-    type_graphql_1.Query(() => String),
+    type_graphql_1.Query(() => [interfaces_1.UserRo]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

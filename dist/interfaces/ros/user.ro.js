@@ -9,18 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserRo = void 0;
 const type_graphql_1 = require("type-graphql");
-let UserResolver = class UserResolver {
-    async getUsers() { }
+let UserRo = class UserRo {
 };
 __decorate([
-    type_graphql_1.Query(() => String),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getUsers", null);
-UserResolver = __decorate([
-    type_graphql_1.Resolver()
-], UserResolver);
-exports.default = UserResolver;
-//# sourceMappingURL=user.resolver.js.map
+    type_graphql_1.Field(() => type_graphql_1.Int),
+    __metadata("design:type", Number)
+], UserRo.prototype, "id", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "first_name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "last_name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "avatar", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UserRo.prototype, "created_at", void 0);
+UserRo = __decorate([
+    type_graphql_1.ObjectType()
+], UserRo);
+exports.UserRo = UserRo;
+//# sourceMappingURL=user.ro.js.map
