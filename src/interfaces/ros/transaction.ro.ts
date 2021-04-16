@@ -42,3 +42,15 @@ export class TransactionSpentIncomeAndTotalRo {
   @Field(() => Int)
   total: number;
 }
+
+@ObjectType()
+export class UserTopFiveCategories {
+  @Field()
+  category: string;
+
+  @Field()
+  icon_url: string;
+
+  @Field(() => Int)
+  count: number;
+}

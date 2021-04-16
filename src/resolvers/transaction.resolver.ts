@@ -5,6 +5,7 @@ import {
   TransactionSpentIncomeAndTotalRo,
   TransactionWithUserRo,
 } from "../interfaces";
+import { UserTopFiveCategories } from "../interfaces/ros/transaction.ro";
 
 @Resolver(() => TransactionWithUserRo)
 export default class TransactionResolver {
@@ -24,6 +25,11 @@ export default class TransactionResolver {
   @Query(() => [TransactionWithUserRo])
   async getTransactionsWithUser() {
     return await this.txservice.getTransactions();
+  }
+
+  @Query(() => [UserTopFiveCategories])
+  async getUserTopFiveCategories(@Arg("userId", () => Int) id: number) {
+    return await this.txservice.getUserTopFiveCategories(id);
   }
 
   @FieldResolver()
