@@ -30,4 +30,15 @@ export default class TransactionService {
       throw createError(error.message, error.statusCode);
     }
   }
+
+  async getSimilarUsersId(userId: number): Promise<number[]> {
+    try {
+      const result = await axios.get<{
+        data: number[];
+      }>(composeURL("transactions", `users/${userId}/similar-users`));
+      return result.data.data;
+    } catch (error) {
+      throw createError(error.message, error.statusCode);
+    }
+  }
 }

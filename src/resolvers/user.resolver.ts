@@ -21,6 +21,11 @@ export default class UserResolver {
     return await this.service.getUserById(id);
   }
 
+  @Query(() => [UserRo])
+  async getSimilarUsers(@Arg("id", () => Int) id: number) {
+    return await this.service.getSimilarUsers(id);
+  }
+
   @FieldResolver()
   async total_transactions(@Root() root: UserWithTxCountRo) {
     const result = await this.service.getUserTxCount(root.id);
