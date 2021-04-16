@@ -21,7 +21,7 @@ export default class UserResolver {
     return await this.service.getUserById(id);
   }
 
-  @Query(() => [UserRo])
+  @Query(() => [UserWithTxCountRo])
   async getSimilarUsers(@Arg("id", () => Int) id: number) {
     return await this.service.getSimilarUsers(id);
   }
