@@ -1,6 +1,7 @@
 import axios from "axios";
 import { composeURL, createError } from "../utils";
 import { TransactionRo, TransactionSpentIncomeAndTotalRo } from "../interfaces";
+import { UserTopFiveCategories } from "src/interfaces/ros/transaction.ro";
 
 export default class TransactionService {
   async getTransactions(): Promise<TransactionRo[]> {
@@ -36,6 +37,19 @@ export default class TransactionService {
       const result = await axios.get<{
         data: number[];
       }>(composeURL("transactions", `users/${userId}/similar-users`));
+      return result.data.data;
+    } catch (error) {
+      throw createError(error.message, error.statusCode);
+    }
+  }
+
+  async getUserTopFiveCategories(
+    userId: number
+  ): Promise<UserTopFiveCategories[]> {
+    try {
+      const result = await axios.get<{
+        data: UserTopFiveCategories[];
+      }>(composeURL("transactions", `users/${userId}/top-five-categories`));
       return result.data.data;
     } catch (error) {
       throw createError(error.message, error.statusCode);
