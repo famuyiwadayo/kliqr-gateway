@@ -1,5 +1,5 @@
 import { Arg, FieldResolver, Query, Resolver, Root, Int } from "type-graphql";
-import { UserRo, UserWithTxCountRo } from "../interfaces";
+import { similarUsersDto, UserRo, UserWithTxCountRo } from "../interfaces";
 import { UserService } from "../services";
 
 @Resolver(() => UserWithTxCountRo)
@@ -22,8 +22,8 @@ export default class UserResolver {
   }
 
   @Query(() => [UserWithTxCountRo])
-  async getSimilarUsers(@Arg("id", () => Int) id: number) {
-    return await this.service.getSimilarUsers(id);
+  async getSimilarUsers(@Arg("input") input: similarUsersDto) {
+    return await this.service.getSimilarUsers(input);
   }
 
   @FieldResolver()
