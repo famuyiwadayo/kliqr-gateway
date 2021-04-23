@@ -1,6 +1,6 @@
 import axios from "axios";
 import { composeURL, createError } from "../utils";
-import { similarUsersDto, UserRo, UserTxCountRo } from "../interfaces";
+import { UserRo, UserTxCountRo } from "../interfaces";
 import { TransactionService } from ".";
 
 export default class UserService {
@@ -39,10 +39,10 @@ export default class UserService {
     }
   }
 
-  async getSimilarUsers(input: similarUsersDto): Promise<UserRo[]> {
-    console.log(input);
+  async getSimilarUsers(userId: number): Promise<UserRo[]> {
+    // console.log(input);
     try {
-      const userIds = await this.txService.getSimilarUsersId(input);
+      const userIds = await this.txService.getSimilarUsersId(userId);
       const toRunInParallel: any[] = [];
       userIds.forEach((id) => toRunInParallel.push(this.getUserById(id)));
       const result = await Promise.all(toRunInParallel);
