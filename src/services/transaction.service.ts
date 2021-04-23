@@ -1,7 +1,11 @@
 import axios from "axios";
 import { composeURL, createError } from "../utils";
-import { TransactionRo, TransactionSpentIncomeAndTotalRo } from "../interfaces";
-import { UserTopFiveCategories } from "src/interfaces/ros/transaction.ro";
+import {
+  TransactionRo,
+  TransactionSpentIncomeAndTotalRo,
+  UserTopFiveCategories,
+  similarUsersDto,
+} from "../interfaces";
 
 export default class TransactionService {
   async getTransactions(): Promise<TransactionRo[]> {
@@ -32,11 +36,14 @@ export default class TransactionService {
     }
   }
 
-  async getSimilarUsersId(userId: number): Promise<number[]> {
+  async getSimilarUsersId(input: similarUsersDto): Promise<number[]> {
     try {
-      const result = await axios.get<{
+      const result = await axios.post<{
         data: number[];
-      }>(composeURL("transactions", `users/${userId}/similar-users`));
+      }>(composeURL("transactions", `users/${input.userId}/similar-users`), {
+        trends: input.trends,
+      });
+
       return result.data.data;
     } catch (error) {
       throw createError(error.message, error.statusCode);
