@@ -4,7 +4,6 @@ import {
   TransactionRo,
   TransactionSpentIncomeAndTotalRo,
   UserTopFiveCategories,
-  similarUsersDto,
 } from "../interfaces";
 
 export default class TransactionService {
@@ -36,12 +35,18 @@ export default class TransactionService {
     }
   }
 
-  async getSimilarUsersId(input: similarUsersDto): Promise<number[]> {
+  async getSimilarUsersId(userId: number): Promise<number[]> {
     try {
+      const _trends = await this.getUserTopFiveCategories(userId);
+      const trends = (_trends as any).reduce((acc: string[], val: any) => {
+        acc.push(val.category);
+        return acc;
+      }, []);
+
       const result = await axios.post<{
         data: number[];
-      }>(composeURL("transactions", `users/${input.userId}/similar-users`), {
-        trends: input.trends,
+      }>(composeURL("transactions", `users/${userId}/similar-users`), {
+        trends,
       });
 
       return result.data.data;
